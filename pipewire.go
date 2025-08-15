@@ -11,7 +11,10 @@ type EventType string
 
 const (
 	EmptyEvent EventType = ""
-	EventNode  EventType = "PipeWire:Interface:Node"
+
+	EventTypePipewireInterfaceNode = EventType("PipeWire:Interface:Node")
+	EventTypePipewireInterfacePort = EventType("PipeWire:Interface:Port")
+	EventTypePipewireInterfaceLink = EventType("PipeWire:Interface:Link")
 )
 
 type (
@@ -45,31 +48,39 @@ type (
 	}
 
 	EventInfoProps struct {
-		AdaptFollowerSpaNode *string `json:"adapt.follower.spa-node,omitempty"`
-		ApplicationIconName  *string `json:"application.icon-name,omitempty"`
-		ApplicationID        *string `json:"application.id,omitempty"`
-		ApplicationName      *string `json:"application.name,omitempty"`
-		ClientID             *int    `json:"client.id,omitempty"`
-		ClockQuantumLimit    *int    `json:"clock.quantum-limit,omitempty"`
-		FactoryID            *int    `json:"factory.id,omitempty"`
-		LibraryName          *string `json:"library.name,omitempty"`
-		MediaCategory        *string `json:"media.category,omitempty"`
-		MediaClass           *string `json:"media.class,omitempty"`
-		MediaName            *string `json:"media.name,omitempty"`
-		MediaRole            *string `json:"media.role,omitempty"`
-		MediaType            *string `json:"media.type,omitempty"`
-		NodeAlwaysProcess    *bool   `json:"node.always-process,omitempty"`
-		NodeAutoconnect      *bool   `json:"node.autoconnect,omitempty"`
-		NodeDescription      *string `json:"node.description,omitempty"`
-		NodeLoopName         *string `json:"node.loop.name,omitempty"`
-		NodeName             *string `json:"node.name,omitempty"`
-		NodeRate             *string `json:"node.rate,omitempty"`
-		NodeWantDriver       *bool   `json:"node.want-driver,omitempty"`
-		ObjectID             *int    `json:"object.id,omitempty"`
-		ObjectRegister       *bool   `json:"object.register,omitempty"`
-		ObjectSerial         *int    `json:"object.serial,omitempty"`
-		PortGroup            *string `json:"port.group,omitempty"`
-		StreamIsLive         *bool   `json:"stream.is-live,omitempty"`
+		AdaptFollowerSpaNode *string     `json:"adapt.follower.spa-node,omitempty"`
+		ApplicationIconName  *string     `json:"application.icon-name,omitempty"`
+		ApplicationID        *string     `json:"application.id,omitempty"`
+		ApplicationName      *string     `json:"application.name,omitempty"`
+		AudioChannel         *string     `json:"audio.channel,omitempty"`
+		ClientID             *int        `json:"client.id,omitempty"`
+		ClockQuantumLimit    *int        `json:"clock.quantum-limit,omitempty"`
+		FactoryID            *int        `json:"factory.id,omitempty"`
+		FormatDsp            *string     `json:"format.dsp,omitempty"`
+		LibraryName          *string     `json:"library.name,omitempty"`
+		MediaCategory        *string     `json:"media.category,omitempty"`
+		MediaClass           *MediaClass `json:"media.class,omitempty"`
+		MediaName            *string     `json:"media.name,omitempty"`
+		MediaRole            *string     `json:"media.role,omitempty"`
+		MediaType            *string     `json:"media.type,omitempty"`
+		NodeID               *int        `json:"node.id,omitempty"`
+		NodeAlwaysProcess    *bool       `json:"node.always-process,omitempty"`
+		NodeAutoconnect      *bool       `json:"node.autoconnect,omitempty"`
+		NodeDescription      *string     `json:"node.description,omitempty"`
+		NodeLoopName         *string     `json:"node.loop.name,omitempty"`
+		NodeName             *string     `json:"node.name,omitempty"`
+		NodeRate             *string     `json:"node.rate,omitempty"`
+		NodeWantDriver       *bool       `json:"node.want-driver,omitempty"`
+		ObjectID             *int        `json:"object.id,omitempty"`
+		ObjectPath           *string     `json:"object.path,omitempty"`
+		ObjectRegister       *bool       `json:"object.register,omitempty"`
+		ObjectSerial         *int        `json:"object.serial,omitempty"`
+		PortAlias            *string     `json:"port.alias,omitempty"`
+		PortGroup            *string     `json:"port.group,omitempty"`
+		PortDirection        *string     `json:"port.direction,omitempty"`
+		PortID               *int        `json:"port.id,omitempty"`
+		PortName             *string     `json:"port.name,omitempty"`
+		StreamIsLive         *bool       `json:"stream.is-live,omitempty"`
 	}
 
 	ParamEnumFormat struct {
@@ -138,15 +149,15 @@ type MediaClass string
 
 const (
 	// A source of audio samples like a microphone
-	MediaAudioSource MediaClass = "Audio/Source"
+	MediaClassAudioSource MediaClass = "Audio/Source"
 	// A sink for audio samples, like an audio card
-	MediaAudioSink MediaClass = "Audio/Sink"
+	MediaClassAudioSink MediaClass = "Audio/Sink"
 	// A node that is both a sink and a source
-	MediaAudioDuplex MediaClass = "Audio/Duplex"
+	MediaClassAudioDuplex MediaClass = "Audio/Duplex"
 	// A playback stream
-	MediaStreamOutputAudio MediaClass = "Stream/Output/Audio"
+	MediaClassStreamOutputAudio MediaClass = "Stream/Output/Audio"
 	// A capture stream
-	MediaStreamInputAudio MediaClass = "Stream/Input/Audio"
+	MediaClassStreamInputAudio MediaClass = "Stream/Input/Audio"
 )
 
 // Example of when an object is removed:
@@ -161,7 +172,7 @@ func (e *Event) IsRemovalEvent() bool {
 
 // Tries to convert the JSON info field to NodeProps
 func (e *Event) NodeProps() (*NodeProps, error) {
-	if e.Type != EventNode {
+	if e.Type != EventTypePipewireInterfaceNode {
 		return nil, fmt.Errorf("event is not a node event type")
 	} else if e.Info == nil {
 		return nil, fmt.Errorf("event info is nil")

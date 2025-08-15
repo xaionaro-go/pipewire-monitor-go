@@ -9,7 +9,7 @@ import (
 
 // Only watch for nodes or removal events
 func filter(e *pwmonitor.Event) bool {
-	return e.Type == pwmonitor.EventNode || e.IsRemovalEvent()
+	return e.Type == pwmonitor.EventTypePipewireInterfaceNode || e.IsRemovalEvent()
 }
 
 func main() {
