@@ -26,12 +26,12 @@ type (
 	}
 
 	EventInfo struct {
-		Direction  string         `json:"direction,omitempty"`
-		ChangeMask []string       `json:"change-mask"`
-		Props      map[string]any `json:"props,omitempty"`
-		Params     *EventParams   `json:"params,omitempty"`
-		State      *State         `json:"state,omitempty"`
-		Error      *any           `json:"error,omitempty"`
+		Direction  string          `json:"direction,omitempty"`
+		ChangeMask []string        `json:"change-mask"`
+		Props      *EventInfoProps `json:"props,omitempty"`
+		Params     *EventParams    `json:"params,omitempty"`
+		State      *State          `json:"state,omitempty"`
+		Error      *any            `json:"error,omitempty"`
 	}
 
 	EventParams struct {
@@ -42,6 +42,34 @@ type (
 		Buffers    []any             `json:"Buffers,omitempty"`
 		Latency    []ParamLatency    `json:"Latency,omitempty"`
 		Tag        []any             `json:"Tag,omitempty"`
+	}
+
+	EventInfoProps struct {
+		AdaptFollowerSpaNode *string `json:"adapt.follower.spa-node,omitempty"`
+		ApplicationIconName  *string `json:"application.icon-name,omitempty"`
+		ApplicationID        *string `json:"application.id,omitempty"`
+		ApplicationName      *string `json:"application.name,omitempty"`
+		ClientID             *int    `json:"client.id,omitempty"`
+		ClockQuantumLimit    *int    `json:"clock.quantum-limit,omitempty"`
+		FactoryID            *int    `json:"factory.id,omitempty"`
+		LibraryName          *string `json:"library.name,omitempty"`
+		MediaCategory        *string `json:"media.category,omitempty"`
+		MediaClass           *string `json:"media.class,omitempty"`
+		MediaName            *string `json:"media.name,omitempty"`
+		MediaRole            *string `json:"media.role,omitempty"`
+		MediaType            *string `json:"media.type,omitempty"`
+		NodeAlwaysProcess    *bool   `json:"node.always-process,omitempty"`
+		NodeAutoconnect      *bool   `json:"node.autoconnect,omitempty"`
+		NodeDescription      *string `json:"node.description,omitempty"`
+		NodeLoopName         *string `json:"node.loop.name,omitempty"`
+		NodeName             *string `json:"node.name,omitempty"`
+		NodeRate             *string `json:"node.rate,omitempty"`
+		NodeWantDriver       *bool   `json:"node.want-driver,omitempty"`
+		ObjectID             *int    `json:"object.id,omitempty"`
+		ObjectRegister       *bool   `json:"object.register,omitempty"`
+		ObjectSerial         *int    `json:"object.serial,omitempty"`
+		PortGroup            *string `json:"port.group,omitempty"`
+		StreamIsLive         *bool   `json:"stream.is-live,omitempty"`
 	}
 
 	ParamEnumFormat struct {
