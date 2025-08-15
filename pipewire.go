@@ -31,23 +31,23 @@ type (
 		Props      map[string]any `json:"props,omitempty"`
 		Params     *EventParams   `json:"params,omitempty"`
 		State      *State         `json:"state,omitempty"`
-		Error      *interface{}   `json:"error,omitempty"`
+		Error      *any           `json:"error,omitempty"`
 	}
 
 	EventParams struct {
 		EnumFormat []ParamEnumFormat `json:"EnumFormat,omitempty"`
 		Meta       []ParamMeta       `json:"Meta,omitempty"`
 		IO         []ParamIO         `json:"IO,omitempty"`
-		Format     []interface{}     `json:"Format,omitempty"`
-		Buffers    []interface{}     `json:"Buffers,omitempty"`
+		Format     []any             `json:"Format,omitempty"`
+		Buffers    []any             `json:"Buffers,omitempty"`
 		Latency    []ParamLatency    `json:"Latency,omitempty"`
-		Tag        []interface{}     `json:"Tag,omitempty"`
+		Tag        []any             `json:"Tag,omitempty"`
 	}
 
 	ParamEnumFormat struct {
-		MediaType    string      `json:"mediaType"`
-		MediaSubtype string      `json:"mediaSubtype"`
-		Format       interface{} `json:"format"`
+		MediaType    string `json:"mediaType"`
+		MediaSubtype string `json:"mediaSubtype"`
+		Format       any    `json:"format"`
 	}
 
 	ParamMeta struct {
