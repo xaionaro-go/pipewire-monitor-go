@@ -1,4 +1,4 @@
-module github.com/ConnorsApps/pipewire-monitor-go
+module github.com/xaionaro-go/pipewire-monitor-go
 
 go 1.23
 

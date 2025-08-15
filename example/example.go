@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	pwmonitor "github.com/ConnorsApps/pipewire-monitor-go"
+	pwmonitor "github.com/xaionaro-go/pipewire-monitor-go"
 )
 
 // Only watch for nodes or removal events
