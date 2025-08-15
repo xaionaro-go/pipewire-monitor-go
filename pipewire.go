@@ -26,12 +26,12 @@ type (
 	}
 
 	EventInfo struct {
-		Direction  string       `json:"direction,omitempty"`
-		ChangeMask []string     `json:"change-mask"`
-		Props      interface{}  `json:"props"`
-		Params     *EventParams `json:"params,omitempty"`
-		State      *State       `json:"state,omitempty"`
-		Error      *interface{} `json:"error,omitempty"`
+		Direction  string         `json:"direction,omitempty"`
+		ChangeMask []string       `json:"change-mask"`
+		Props      map[string]any `json:"props,omitempty"`
+		Params     *EventParams   `json:"params,omitempty"`
+		State      *State         `json:"state,omitempty"`
+		Error      *interface{}   `json:"error,omitempty"`
 	}
 
 	EventParams struct {
