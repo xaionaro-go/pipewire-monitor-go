@@ -58,6 +58,11 @@ type (
 		FactoryID            *int        `json:"factory.id,omitempty"`
 		FormatDsp            *string     `json:"format.dsp,omitempty"`
 		LibraryName          *string     `json:"library.name,omitempty"`
+		LinkInputNode        *int        `json:"link.input.node,omitempty"`
+		LinkInputPort        *int        `json:"link.input.port,omitempty"`
+		LinkOutputNode       *int        `json:"link.output.node,omitempty"`
+		LinkOutputPort       *int        `json:"link.output.port,omitempty"`
+		LinkPassive          *bool       `json:"link.passive,omitempty"`
 		MediaCategory        *string     `json:"media.category,omitempty"`
 		MediaClass           *MediaClass `json:"media.class,omitempty"`
 		MediaName            *string     `json:"media.name,omitempty"`
